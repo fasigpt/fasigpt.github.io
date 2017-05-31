@@ -1,0 +1,14 @@
+= Basics of .Net Foundational Libraries
+:hp-image: /covers/cover.png
+:published_at: 2017-05-31
+:hp-tags: asp.net
+:hp-alt-title: BaseClassLibrary-vs-CLR-CoreFx-vs-CoreClr
+
+Base Class Library v/s CLR:
+
+The .Net Framework Base Class Library is the base foundation for developing applications, components and Controls as it exposes Several APIS implemented in different namespaces like System.IO, System.Globalization and many more. 
+Under the hood, the actual component that has been refereed to Base Class Library is called MSCORLIb.dll. The actual source has been made open source and is available here https://referencesource.microsoft.com/#mscorlib,namespaces.
+
+To understand this a bit more, let’s see what happens when I create a file from my asp.net web page using the below code.
+
+image::bcl1.png
