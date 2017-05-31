@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 31 May 2017 04:18:06 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Introduction to .Net Libaries and Runtime]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 31 May 2017 04:45:44 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Introduction to .Net Libaries and Runtime]]></title><description><![CDATA[<div class="paragraph">
 <p>Base Class Library v/s CLR:</p>
 </div>
 <div class="paragraph">
@@ -67,4 +67,28 @@ Under the hood, the actual component that has been refereed to Base Class Librar
 </div>
 <div class="paragraph">
 <p>The CoreFx is fully open Source and is available on GitHub <a href="https://github.com/dotnet/corefx" class="bare">https://github.com/dotnet/corefx</a></p>
+</div>
+<div class="paragraph">
+<p>When you install .net core , all different versions sit in a default location C:\Program Files\dotnet\shared\Microsoft.NETCore.App</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl7.png" alt="bcl7.png">
+</div>
+</div>
+<div class="paragraph">
+<p>In the below picture you can see the CoreFx libraries (System.Collections. System.IO etc)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl8.png" alt="bcl8.png">
+</div>
+</div>
+<div class="paragraph">
+<p>And here is the CoreClr dll which implements multiple functionalities including GC</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl9.png" alt="bcl9.png">
+</div>
 </div>]]></description><link>https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html</guid><category><![CDATA[asp.net]]></category><pubDate>Wed, 31 May 2017 00:00:00 GMT</pubDate></item></channel></rss>
