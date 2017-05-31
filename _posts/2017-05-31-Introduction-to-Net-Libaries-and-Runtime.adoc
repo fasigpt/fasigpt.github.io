@@ -11,17 +11,17 @@ Under the hood, the actual component that has been refereed to Base Class Librar
 
 To understand this a bit more, let’s see what happens when I create a file from my asp.net web page using the below code.
 
-image:bcl1.png[]
+image::bcl1.png[]
 
 I attached a debugger to see how File Creation happens from my Page_Load function, and in the below stack we can see it ultimately calls a File Create API which is in MSCORLIB and which in turn would make a native call to OS through kernel32!CreateFile API.
 
-image:bcl2.png[]
+image::bcl2.png[]
 
 CLR : Common Language Runtime:
    
 Your application code/base class library calls all run on an environment called CLR. The .net framework by default sits in the folder C:\Windows\Microsoft.NET\Framework64\v4.0.30319 and it has a dll called clr.dll which can be seen below
 
-image:bcl3.png[]
+image::bcl3.png[]
 
 
 The clr.dll is the runtime library and implements most functionality including Garbage Collection, Memory Management, Thread management.
@@ -31,16 +31,16 @@ Now, let’s look at same of the stacks in action when CLR runtime is handling t
 
 Thread Management: The previous stack that you saw wasn’t complete, but here you can see at the bottom of stack how CLR runtime handles the thread required to execute your code.
 
-image:bcl4.png[]
+image::bcl4.png[]
 
 Garbage Collection: In the below thread the system.xml needed more space and that allocation was handled through CLR. 
 
-image:bcl5.png[]
+image::bcl5.png[]
 
 CoreFx vs CoreClr:
 
 Base Class Library is for applications targeting full .Net Framework but for asp.net core applications the base class library is called coreFx and in this image we can see how they fit to each framework.
 
-image:bcl6.png[]
+image::bcl6.png[]
 
 The CoreFx is fully open Source and is available on GitHub https://github.com/dotnet/corefx 
