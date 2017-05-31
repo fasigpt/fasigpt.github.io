@@ -45,3 +45,16 @@ Base Class Library is for applications targeting full .Net Framework but for asp
 image::bcl6.png[]
 
 The CoreFx is fully open Source and is available on GitHub https://github.com/dotnet/corefx 
+
+
+When you install .net core , all different versions sit in a default location C:\Program Files\dotnet\shared\Microsoft.NETCore.App 
+
+image::bcl7.png[]
+
+In the below picture you can see the CoreFx libraries (System.Collections. System.IO etc)
+
+image::bcl8.png[]
+
+And here is the CoreClr dll which implements multiple functionalities including GC 
+
+image::bcl9.png[]
