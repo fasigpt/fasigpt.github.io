@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Introduction to .Net Libaries and Runtime</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1496204286024" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Its Just the beginning.." />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Introduction to .Net Libaries and Runtime" />
+    <meta property="og:description" content="Base Class Library v/s CLR: The .Net Framework Base Class Library is the base foundation for developing applications, components and Controls as it exposes Several APIS implemented in different namespaces like System.IO, System.Globalization and many more. Under the hood, the actual component that has been refereed to" />
+    <meta property="og:url" content="https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html" />
+    <meta property="article:published_time" content="2017-05-31T00:00:00.000Z" />
+    <meta property="article:tag" content="asp.net" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Introduction to .Net Libaries and Runtime" />
+    <meta name="twitter:description" content="Base Class Library v/s CLR: The .Net Framework Base Class Library is the base foundation for developing applications, components and Controls as it exposes Several APIS implemented in different namespaces like System.IO, System.Globalization and many more. Under the hood, the actual component that has been refereed to" />
+    <meta name="twitter:url" content="https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Its Just the beginning..",
+    "author": {
+        "@type": "Person",
+        "name": "fasigpt",
+        "image": "https://avatars0.githubusercontent.com/u/11519211?v=3",
+        "url": "https://fasigpt.github.io/author/fasigpt/"
+    },
+    "headline": "Introduction to .Net Libaries and Runtime",
+    "url": "https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html",
+    "datePublished": "2017-05-31T00:00:00.000Z",
+    "keywords": "asp.net",
+    "description": "Base Class Library v/s CLR: The .Net Framework Base Class Library is the base foundation for developing applications, components and Controls as it exposes Several APIS implemented in different namespaces like System.IO, System.Globalization and many more. Under the hood, the actual component that has been refereed to"
+}
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="Its Just the beginning.." href="https://fasigpt.github.io/rss/" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
+</head>
+<body class="post-template tag-aspnet nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-aspnet">
+
+        <header class="post-header">
+            <h1 class="post-title">Introduction to .Net Libaries and Runtime</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2017-05-31">31 May 2017</time>  on <a href="https://fasigpt.github.io/tag/aspnet/">asp.net</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div class="paragraph">
+<p>Base Class Library v/s CLR:</p>
+</div>
+<div class="paragraph">
+<p>The .Net Framework Base Class Library is the base foundation for developing applications, components and Controls as it exposes Several APIS implemented in different namespaces like System.IO, System.Globalization and many more.
+Under the hood, the actual component that has been refereed to Base Class Library is called MSCORLIb.dll. The actual source has been made open source and is available here <a href="https://referencesource.microsoft.com/#mscorlib,namespaces" class="bare">https://referencesource.microsoft.com/#mscorlib,namespaces</a>.</p>
+</div>
+<div class="paragraph">
+<p>To understand this a bit more, let’s see what happens when I create a file from my asp.net web page using the below code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl1.png" alt="bcl1.png">
+</div>
+</div>
+<div class="paragraph">
+<p>I attached a debugger to see how File Creation happens from my Page_Load function, and in the below stack we can see it ultimately calls a File Create API which is in MSCORLIB and which in turn would make a native call to OS through kernel32!CreateFile API.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl2.png" alt="bcl2.png">
+</div>
+</div>
+<div class="paragraph">
+<p>CLR : Common Language Runtime:</p>
+</div>
+<div class="paragraph">
+<p>Your application code/base class library calls all run on an environment called CLR. The .net framework by default sits in the folder C:\Windows\Microsoft.NET\Framework64\v4.0.30319 and it has a dll called clr.dll which can be seen below</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl3.png" alt="bcl3.png">
+</div>
+</div>
+<div class="paragraph">
+<p>The clr.dll is the runtime library and implements most functionality including Garbage Collection, Memory Management, Thread management.</p>
+</div>
+<div class="paragraph">
+<p>Now, let’s look at same of the stacks in action when CLR runtime is handling the above functionalities.</p>
+</div>
+<div class="paragraph">
+<p>Thread Management: The previous stack that you saw wasn’t complete, but here you can see at the bottom of stack how CLR runtime handles the thread required to execute your code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl4.png" alt="bcl4.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Garbage Collection: In the below thread the system.xml needed more space and that allocation was handled through CLR.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl5.png" alt="bcl5.png">
+</div>
+</div>
+<div class="paragraph">
+<p>CoreFx vs CoreClr:</p>
+</div>
+<div class="paragraph">
+<p>Base Class Library is for applications targeting full .Net Framework but for asp.net core applications the base class library is called coreFx and in this image we can see how they fit to each framework.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl6.png" alt="bcl6.png">
+</div>
+</div>
+<div class="paragraph">
+<p>The CoreFx is fully open Source and is available on GitHub <a href="https://github.com/dotnet/corefx" class="bare">https://github.com/dotnet/corefx</a></p>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="https://fasigpt.github.io/author/fasigpt/" style="background-image: url(https://avatars0.githubusercontent.com/u/11519211?v&#x3D;3)"><span class="hidden">fasigpt's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="https://fasigpt.github.io/author/fasigpt/">fasigpt</a></h4>
+
+                    <p>Read <a href="https://fasigpt.github.io/author/fasigpt/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Introduction%20to%20.Net%20Libaries%20and%20Runtime&amp;url=https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://fasigpt.github.io/2017/05/31/Base-Class-Library-vs-CLR-Core-Fx-vs-Core-Clr.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="https://fasigpt.github.io">Its Just the beginning..</a> &copy; 2017</section>
+            <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+       
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1496204286024"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1496204286024"></script>
+
+</body>
+</html>
