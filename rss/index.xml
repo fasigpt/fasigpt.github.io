@@ -1,1 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 31 May 2017 03:50:37 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl></channel></rss>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 31 May 2017 04:00:00 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Introduction to .Net Libaries and Runtime]]></title><description><![CDATA[<div class="literalblock">
+<div class="content">
+<pre>:published_at: 2017-05-31
+:hp-tags: .net , .net core
+:hp-alt-title: BaseClassLibrary-vs-CLR-CoreFx-vs-CoreClr</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Base Class Library v/s CLR:</p>
+</div>
+<div class="paragraph">
+<p>The .Net Framework Base Class Library is the base foundation for developing applications, components and Controls as it exposes Several APIS implemented in different namespaces like System.IO, System.Globalization and many more.
+Under the hood, the actual component that has been refereed to Base Class Library is called MSCORLIb.dll. The actual source has been made open source and is available here <a href="https://referencesource.microsoft.com/#mscorlib,namespaces" class="bare">https://referencesource.microsoft.com/#mscorlib,namespaces</a>.</p>
+</div>
+<div class="paragraph">
+<p>To understand this a bit more, let’s see what happens when I create a file from my asp.net web page using the below code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl1.png" alt="bcl1.png">
+</div>
+</div>
+<div class="paragraph">
+<p>I attached a debugger to see how File Creation happens from my Page_Load function, and in the below stack we can see it ultimately calls a File Create API which is in MSCORLIB and which in turn would make a native call to OS through kernel32!CreateFile API.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl2.png" alt="bcl2.png">
+</div>
+</div>
+<div class="paragraph">
+<p>CLR : Common Language Runtime:</p>
+</div>
+<div class="paragraph">
+<p>Your application code/base class library calls all run on an environment called CLR. The .net framework by default sits in the folder C:\Windows\Microsoft.NET\Framework64\v4.0.30319 and it has a dll called clr.dll which can be seen below</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl3.png" alt="bcl3.png">
+</div>
+</div>
+<div class="paragraph">
+<p>The clr.dll is the runtime library and implements most functionality including Garbage Collection, Memory Management, Thread management.</p>
+</div>
+<div class="paragraph">
+<p>Now, let’s look at same of the stacks in action when CLR runtime is handling the above functionalities.</p>
+</div>
+<div class="paragraph">
+<p>Thread Management: The previous stack that you saw wasn’t complete, but here you can see at the bottom of stack how CLR runtime handles the thread required to execute your code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl4.png" alt="bcl4.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Garbage Collection: In the below thread the system.xml needed more space and that allocation was handled through CLR.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl5.png" alt="bcl5.png">
+</div>
+</div>
+<div class="paragraph">
+<p>CoreFx vs CoreClr:</p>
+</div>
+<div class="paragraph">
+<p>Base Class Library is for applications targeting full .Net Framework but for asp.net core applications the base class library is called coreFx and in this image we can see how they fit to each framework.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/bcl6.png" alt="bcl6.png">
+</div>
+</div>
+<div class="paragraph">
+<p>The CoreFx is fully open Source and is available on GitHub <a href="https://github.com/dotnet/corefx" class="bare">https://github.com/dotnet/corefx</a></p>
+</div>]]></description><link>https://fasigpt.github.io/2017/05/31/Introduction-to-Net-Libaries-and-Runtime.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/05/31/Introduction-to-Net-Libaries-and-Runtime.html</guid><pubDate>Wed, 31 May 2017 00:00:00 GMT</pubDate></item></channel></rss>
