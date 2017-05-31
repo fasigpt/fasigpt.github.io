@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Implementing Authentication in an ASP.NET Core application using Azure Active Directory</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1496210600680" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Its Just the beginning.." />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Implementing Authentication in an ASP.NET Core application using Azure Active Directory" />
+    <meta property="og:description" content="Implementing Authentication in an ASP.NET Core application using Azure Active Directory. In an on premise world, there are different ways of implementing Authentication and here are some of the scenarios In an Windows world typically you host your site on a WebServer like IIS and you enable Windows Authentication" />
+    <meta property="og:url" content="https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html" />
+    <meta property="article:published_time" content="2017-05-31T00:00:00.000Z" />
+    <meta property="article:tag" content="asp.net" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Implementing Authentication in an ASP.NET Core application using Azure Active Directory" />
+    <meta name="twitter:description" content="Implementing Authentication in an ASP.NET Core application using Azure Active Directory. In an on premise world, there are different ways of implementing Authentication and here are some of the scenarios In an Windows world typically you host your site on a WebServer like IIS and you enable Windows Authentication" />
+    <meta name="twitter:url" content="https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Its Just the beginning..",
+    "author": {
+        "@type": "Person",
+        "name": "fasigpt",
+        "image": "https://avatars0.githubusercontent.com/u/11519211?v=3",
+        "url": "https://fasigpt.github.io/author/fasigpt/"
+    },
+    "headline": "Implementing Authentication in an ASP.NET Core application using Azure Active Directory",
+    "url": "https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html",
+    "datePublished": "2017-05-31T00:00:00.000Z",
+    "keywords": "asp.net",
+    "description": "Implementing Authentication in an ASP.NET Core application using Azure Active Directory. In an on premise world, there are different ways of implementing Authentication and here are some of the scenarios In an Windows world typically you host your site on a WebServer like IIS and you enable Windows Authentication"
+}
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="Its Just the beginning.." href="https://fasigpt.github.io/rss/" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
+</head>
+<body class="post-template tag-aspnet nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-aspnet">
+
+        <header class="post-header">
+            <h1 class="post-title">Implementing Authentication in an ASP.NET Core application using Azure Active Directory</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2017-05-31">31 May 2017</time>  on <a href="https://fasigpt.github.io/tag/aspnet/">asp.net</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div class="paragraph">
+<p>Implementing Authentication in an ASP.NET Core application using Azure Active Directory.</p>
+</div>
+<div class="paragraph">
+<p>In an on premise world, there are different ways of implementing Authentication and here are some of the scenarios</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In an Windows world typically you host your site on a WebServer like IIS and you enable Windows Authentication schemes like Kerberos or NTLM for an in house applications (intranet sites). The Windows Subsystem (LSAS) talks to the on premise Active Directory (Domain Controllers) to implement these Authentication Protocols.</p>
+</li>
+<li>
+<p>The above mechanism requires users to be present in the Active Directory but if you need to sign in with your own custom users then the other approach is to use asp.net membership provider which provides facility to create new users and store them in Database like SQL. So, now any non-domain user can use the site and services.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Imagine you access ten different public sites and you have ten different usernames and passwords to remember. It’s a tedious Job to remember all different usernames and passwords. If you happen to use same password across all sites and if the password gets hacked then you are in trouble!</p>
+</div>
+<div class="paragraph">
+<p>Today Social Login is a buzzword which is completely different than our traditional authentication process. This approach integrates applications with third party providers like Facebook ,Twitter ,Google to provide the Single Sign on Experience.</p>
+</div>
+<div class="paragraph">
+<p>The Azure Active Directory [AAD] provides different Services and one of them is the Identity Management. The AAD provides both options of authenticating an user against domain user and also can help you to easily integrate your application with social login providers (facebook,gmail etc)</p>
+</div>
+<div class="paragraph">
+<p>To begin with, you need to create an Azure Active Directory B2C ( Business to Consumer) Connect which is basically the Cloud Service which implements OpenID Connect authentication protocol on top of OAuth 2.0.  In this Example we will use Visual Studio 2017 to quickly create an asp.net core application and enable Azure Active Directory Based Authentication</p>
+</div>
+<div class="paragraph">
+<p>Step 1 :
+Create the Active Directory b2c Connect using the steps outlined here <a href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started" class="bare">https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started</a></p>
+</div>
+<div class="paragraph">
+<p>Step2:</p>
+</div>
+<div class="paragraph">
+<p>Create an asp.net core project targeting .net Framework</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth1.png" alt="auth1.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, Select Web Application and Click on Change Authentication</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth2.png" alt="auth2.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, Select Work or School Accounts. (Make sure you are using the same account used for azure portal to login to Visual Studio). You will see the b2c tenant listed here (in the Domain Text box) that you created in the step1. Now press OK</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth3.png" alt="auth3.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Here are some of the things that happens to your MVC project behind the scenes</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It adds references to Couple of Nuget Packages “Microsoft.AspnetCore.Authentication.Cookies” and “Microsoft.AspnetCore.Authentication.OpenIdConnect”</p>
+</li>
+<li>
+<p>The ConfigureServices and Configure method inside Startup.cs are updated to inject the Middleware to perform openId Authentication</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth4.png" alt="auth4.png">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth5.png" alt="auth5.png">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The above method reads some of the settings like ClientID, TenantId which are also updated in the appsettings.Json file</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth6.png" alt="auth6.png">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The ClientID is the unique ID generated for each of the application that you register under that tenant. You can also manually create the ClientID by going to the azure portal and selecting the application settings for that tenant.</p>
+</li>
+<li>
+<p>The HomeController is decorated with Authorize attribute that will force the user to perform Authentication</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth7.png" alt="auth7.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Now to test the authentication you should create an user on the azure portal for that specific tenant that you created. Here is the snapshot of that flow</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/auth8.png" alt="auth8.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Now go ahead and launch the default site of your site and it should take you to the login page on which you can enter the newly created user and password. Once the user is authenticated you should see the Home/Index page loading with the username listed.</p>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="https://fasigpt.github.io/author/fasigpt/" style="background-image: url(https://avatars0.githubusercontent.com/u/11519211?v&#x3D;3)"><span class="hidden">fasigpt's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="https://fasigpt.github.io/author/fasigpt/">fasigpt</a></h4>
+
+                    <p>Read <a href="https://fasigpt.github.io/author/fasigpt/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Implementing%20Authentication%20in%20an%20ASP.NET%20Core%20application%20using%20Azure%20Active%20Directory&amp;url=https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="https://fasigpt.github.io">Its Just the beginning..</a> &copy; 2017</section>
+            <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+       
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1496210600680"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1496210600680"></script>
+
+</body>
+</html>
