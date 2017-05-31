@@ -1,0 +1,6 @@
+= My First Blog
+:hp-image: /covers/cover.png
+:published_at: 2017-05-31
+:hp-tags: asp.net
+:hp-alt-title: My English Title
+It's time for a new release of HubPress, which bumps the version
