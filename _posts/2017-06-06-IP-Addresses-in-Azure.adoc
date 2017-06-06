@@ -13,14 +13,14 @@ https://blogs.technet.microsoft.com/canitpro/2014/10/28/step-by-step-assign-a-pu
 
 Now, there may be a slight difference how these IPs behave when you deploy a VM using the new deployment model which is the “Resource Manager” type. The above commands wouldn’t work for the new deployment Model.
 
+image::ip1.png[]
 
-![_config.yml](/images/ip1.png)
 
 Assigning Dynamic Public IP to VM: (using Portal)
 
 When you deploy a VM to one of your Virtual Network, you can configure the Public IP during this time. 
 
-![_config.yml](/images/ip2.png)
+image::ip2.png[]
 
 
 The IP is dynamic which means it might change when you reboot the server
@@ -30,15 +30,15 @@ Assigning Static Public IP to VM: (using Powershell)
 
 You can list all the IP Addresses allotted to your resource group name using Get-AzureRmPublicAddress. In the below picture we can see there is one dynamic IP 
 
-![_config.yml](/images/ip3.png)
+image::ip3.png[]
 
 Now, let’s try to get one Static Public IP using PowerShell. Here are the command for the same. 
 
-![_config.yml](/images/ip4.png)
+image::ip4.png[]
 
 Now lets run the Get-AzureRmPublicAddress again and now we can see another IP in this resource group and this is Static.
 
-![_config.yml](/images/ip5.png)
+image::ip5.png[]
 
 You can bind this to a VM from Azure Portal or through powershell Set-AzureRmPublicIpAddress
 
@@ -51,7 +51,7 @@ You cannot assign static IP to web role or Worker role instances but you can ass
 
 Here I am creating a reserved IP and assigning it to my cloud service
 
-![_config.yml](/images/ip6.png)
+image::ip6.png[]
 
 And now you can assign using 
 
