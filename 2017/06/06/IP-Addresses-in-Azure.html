@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>IP Addresses in Azure</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1496735889527" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="https://fasigpt.github.io/2017/06/06/IP-Addresses-in-Azure.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Its Just the beginning.." />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="IP Addresses in Azure" />
+    <meta property="og:description" content="IP Addresses in Azure: In the classic portal or when you do the classic deployment we have the commands “Set-AzureReservedIPAssociation” and “Set-AzurePublicIP” to create Public Reserved IP and Instance Level Public IP respectively. You can read the below blogs to understand the difference https://docs.microsoft.com/en-us/azure/virtual-network/" />
+    <meta property="og:url" content="https://fasigpt.github.io/2017/06/06/IP-Addresses-in-Azure.html" />
+    <meta property="article:published_time" content="2017-06-06T00:00:00.000Z" />
+    <meta property="article:tag" content="azure azure-networking" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="IP Addresses in Azure" />
+    <meta name="twitter:description" content="IP Addresses in Azure: In the classic portal or when you do the classic deployment we have the commands “Set-AzureReservedIPAssociation” and “Set-AzurePublicIP” to create Public Reserved IP and Instance Level Public IP respectively. You can read the below blogs to understand the difference https://docs.microsoft.com/en-us/azure/virtual-network/" />
+    <meta name="twitter:url" content="https://fasigpt.github.io/2017/06/06/IP-Addresses-in-Azure.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Its Just the beginning..",
+    "author": {
+        "@type": "Person",
+        "name": "fasigpt",
+        "image": "https://avatars0.githubusercontent.com/u/11519211?v=3",
+        "url": "https://fasigpt.github.io/author/fasigpt/"
+    },
+    "headline": "IP Addresses in Azure",
+    "url": "https://fasigpt.github.io/2017/06/06/IP-Addresses-in-Azure.html",
+    "datePublished": "2017-06-06T00:00:00.000Z",
+    "keywords": "azure azure-networking",
+    "description": "IP Addresses in Azure: In the classic portal or when you do the classic deployment we have the commands “Set-AzureReservedIPAssociation” and “Set-AzurePublicIP” to create Public Reserved IP and Instance Level Public IP respectively. You can read the below blogs to understand the difference https://docs.microsoft.com/en-us/azure/virtual-network/"
+}
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="Its Just the beginning.." href="https://fasigpt.github.io/rss/" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
+</head>
+<body class="post-template tag-azure-azure-networking nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-azure-azure-networking">
+
+        <header class="post-header">
+            <h1 class="post-title">IP Addresses in Azure</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2017-06-06">06 June 2017</time>  on <a href="https://fasigpt.github.io/tag/azure-azure-networking/">azure azure-networking</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div class="paragraph">
+<p>IP Addresses in Azure:</p>
+</div>
+<div class="paragraph">
+<p>In the classic portal or when you do the classic deployment we have the commands “Set-AzureReservedIPAssociation” and “Set-AzurePublicIP” to create Public Reserved IP and Instance Level Public IP respectively.</p>
+</div>
+<div class="paragraph">
+<p>You can read the below blogs to understand the difference
+<a href="https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-instance-level-public-ip" class="bare">https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-instance-level-public-ip</a>
+<a href="https://blogs.technet.microsoft.com/canitpro/2014/10/28/step-by-step-assign-a-public-ip-to-a-vm-in-azure/" class="bare">https://blogs.technet.microsoft.com/canitpro/2014/10/28/step-by-step-assign-a-public-ip-to-a-vm-in-azure/</a></p>
+</div>
+<div class="paragraph">
+<p>Now, there may be a slight difference how these IPs behave when you deploy a VM using the new deployment model which is the “Resource Manager” type. The above commands wouldn’t work for the new deployment Model.</p>
+</div>
+<div class="paragraph">
+<p>![_config.yml](/images/ip1.png)</p>
+</div>
+<div class="paragraph">
+<p>Assigning Dynamic Public IP to VM: (using Portal)</p>
+</div>
+<div class="paragraph">
+<p>When you deploy a VM to one of your Virtual Network, you can configure the Public IP during this time.</p>
+</div>
+<div class="paragraph">
+<p>![_config.yml](/images/ip2.png)</p>
+</div>
+<div class="paragraph">
+<p>The IP is dynamic which means it might change when you reboot the server</p>
+</div>
+<div class="paragraph">
+<p>Assigning Static Public IP to VM: (using Powershell)</p>
+</div>
+<div class="paragraph">
+<p>You can list all the IP Addresses allotted to your resource group name using Get-AzureRmPublicAddress. In the below picture we can see there is one dynamic IP</p>
+</div>
+<div class="paragraph">
+<p>![_config.yml](/images/ip3.png)</p>
+</div>
+<div class="paragraph">
+<p>Now, let’s try to get one Static Public IP using PowerShell. Here are the command for the same.</p>
+</div>
+<div class="paragraph">
+<p>![_config.yml](/images/ip4.png)</p>
+</div>
+<div class="paragraph">
+<p>Now lets run the Get-AzureRmPublicAddress again and now we can see another IP in this resource group and this is Static.</p>
+</div>
+<div class="paragraph">
+<p>![_config.yml](/images/ip5.png)</p>
+</div>
+<div class="paragraph">
+<p>You can bind this to a VM from Azure Portal or through powershell Set-AzureRmPublicIpAddress</p>
+</div>
+<div class="paragraph">
+<p>**Now the difference between these IPs are, the static IP will be reserved even after the machine is re started”</p>
+</div>
+<div class="paragraph">
+<p>Assigning Static/Reserved IP to Cloud Service:</p>
+</div>
+<div class="paragraph">
+<p>You cannot assign static IP to web role or Worker role instances but you can assign it to the cloud service only.</p>
+</div>
+<div class="paragraph">
+<p>Here I am creating a reserved IP and assigning it to my cloud service</p>
+</div>
+<div class="paragraph">
+<p>![_config.yml](/images/ip6.png)</p>
+</div>
+<div class="paragraph">
+<p>And now you can assign using</p>
+</div>
+<div class="paragraph">
+<p>Set-AzureReservedIPAssociation -ReservedIPName reservedIpForCloudService  -ServiceName  “yourservice”  (you can run get-AzureService to get the servicename)</p>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="https://fasigpt.github.io/author/fasigpt/" style="background-image: url(https://avatars0.githubusercontent.com/u/11519211?v&#x3D;3)"><span class="hidden">fasigpt's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="https://fasigpt.github.io/author/fasigpt/">fasigpt</a></h4>
+
+                    <p>Read <a href="https://fasigpt.github.io/author/fasigpt/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=IP%20Addresses%20in%20Azure&amp;url=https://fasigpt.github.io/2017/06/06/IP-Addresses-in-Azure.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://fasigpt.github.io/2017/06/06/IP-Addresses-in-Azure.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://fasigpt.github.io/2017/06/06/IP-Addresses-in-Azure.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="https://fasigpt.github.io">Its Just the beginning..</a> &copy; 2017</section>
+            <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+       
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1496735889527"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1496735889527"></script>
+
+</body>
+</html>
