@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Asynchronous Programming -async await ConfigureAwait() deadlock</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1497610138670" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Its Just the beginning.." />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Asynchronous Programming -async await ConfigureAwait() deadlock" />
+    <meta property="og:description" content="Asynchronous Programming -async await ConfigureAwait() deadlock: If you have not read through these below blogs on async,  then you must before you proceed! https://msdn.microsoft.com/en-us/magazine/jj991977.aspx http://blog.stephencleary.com/2012/02/async-and-await.html Section A: Understanding the request Flow: If you are new to" />
+    <meta property="og:url" content="https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html" />
+    <meta property="article:published_time" content="2017-06-16T00:00:00.000Z" />
+    <meta property="article:tag" content="asp.net" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Asynchronous Programming -async await ConfigureAwait() deadlock" />
+    <meta name="twitter:description" content="Asynchronous Programming -async await ConfigureAwait() deadlock: If you have not read through these below blogs on async,  then you must before you proceed! https://msdn.microsoft.com/en-us/magazine/jj991977.aspx http://blog.stephencleary.com/2012/02/async-and-await.html Section A: Understanding the request Flow: If you are new to" />
+    <meta name="twitter:url" content="https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Its Just the beginning..",
+    "author": {
+        "@type": "Person",
+        "name": "fasigpt",
+        "image": "https://avatars0.githubusercontent.com/u/11519211?v=3",
+        "url": "https://fasigpt.github.io/author/fasigpt/"
+    },
+    "headline": "Asynchronous Programming -async await ConfigureAwait() deadlock",
+    "url": "https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html",
+    "datePublished": "2017-06-16T00:00:00.000Z",
+    "keywords": "asp.net",
+    "description": "Asynchronous Programming -async await ConfigureAwait() deadlock: If you have not read through these below blogs on async,  then you must before you proceed! https://msdn.microsoft.com/en-us/magazine/jj991977.aspx http://blog.stephencleary.com/2012/02/async-and-await.html Section A: Understanding the request Flow: If you are new to"
+}
+    </script>
+
+    <meta name="generator" content="HubPress" />
+    <link rel="alternate" type="application/rss+xml" title="Its Just the beginning.." href="https://fasigpt.github.io/rss/" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
+</head>
+<body class="post-template tag-aspnet nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-aspnet">
+
+        <header class="post-header">
+            <h1 class="post-title">Asynchronous Programming -async await ConfigureAwait() deadlock</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2017-06-16">16 June 2017</time>  on <a href="https://fasigpt.github.io/tag/aspnet/">asp.net</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div class="paragraph">
+<p>Asynchronous Programming -async await ConfigureAwait() deadlock:</p>
+</div>
+<div class="paragraph">
+<p>If you have not read through these below blogs on async,  then you must before you proceed!</p>
+</div>
+<div class="paragraph">
+<p><a href="https://msdn.microsoft.com/en-us/magazine/jj991977.aspx" class="bare">https://msdn.microsoft.com/en-us/magazine/jj991977.aspx</a>
+<a href="http://blog.stephencleary.com/2012/02/async-and-await.html" class="bare">http://blog.stephencleary.com/2012/02/async-and-await.html</a></p>
+</div>
+<div class="paragraph">
+<p>Section A:
+Understanding the request Flow: If you are new to this concept  then you should understand how the request flows and here is one simple example to demonstrate the same.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/async1.png" alt="async1.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Everything in the above code will be executed Synchronously, till you hit the line which is decorated with “await”. The operation next to it is called “awaitable operation”  which will be asynchronous.</p>
+</div>
+<div class="paragraph">
+<p>What happens when we hit await:
+If the awaitable operation is not completed then it returns back to the caller and executes the code in the caller …(few Exceptions though, example if the caller has already been blocked by another await or Task.Wait())
+If the awaitable operation is completed then the next line of code after that wait gets executed synchronously. (will discuss this later..)</p>
+</div>
+<div class="paragraph">
+<p>To make the above sample simpler, I have added response.write to see the flow of Execution and the output that you would see here is</p>
+</div>
+<div class="paragraph">
+<p>1, 2, 3,5,4</p>
+</div>
+<div class="paragraph">
+<p>and it is NOT 1,2,3,4,5 because Line5 and Line6 inside getEmployeeDetailsAsync will not execute till getStudentDetailsAsync has finished executing as there is await getStudentDetailsAsync.</p>
+</div>
+<div class="paragraph">
+<p>Section B: when to use ConfigureAwait()</p>
+</div>
+<div class="paragraph">
+<p>Once the awaitable operation has finished, the next piece of code of that function will start executing  under  HttpContext (System.Web.HttpContext)  in an asp.net application.</p>
+</div>
+<div class="paragraph">
+<p>In the above Example, Once Line 4 has finished, Line 5 and Line 6 when they execute they run on a thread linked to asp.net context. The below stack is what you would see when Thread.Sleep is called (Line 4)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/async2.png" alt="async2.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, Let’s try to change the code to use ConfigureAwait(false)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/async3.png" alt="async3.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, what happens is the Line5 and Line6 will run on Thread Pool thread which is not LINKED to aspnet context. Here is the stack for the same which shows it doesn’t have any aspnet context linked.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/async4.png" alt="async4.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Why do you need ConfigureAwait()</p>
+</div>
+<div class="paragraph">
+<p>If you read this blog <a href="http://blog.stephencleary.com/2012/02/async-and-await.html" class="bare">http://blog.stephencleary.com/2012/02/async-and-await.html</a> you can see this sample.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/async5.png" alt="async5.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Here is what happens on Button1_Click</p>
+</div>
+<div class="paragraph">
+<p>-Line 1 Will execute
+-call getEmployeeDetailsAsync
+-Line 4 will Execute and because it has an await and “awaitable operation”  is still running, the control is passed back to Button1_Click
+-Line 2 will Execute and since there is a Wait, this will be in hung state and this is what the stack looks like.
+-Line 3 can only Execute if Line 4 can finish.
+-Now once the Line 4 (awaitable operation) has finished, Line 5 will execute synchronously.
+-The problem is Line5, to execute that line it needs aspnet context and that context is already linked to below thread which is owned while executing Line 2 and this will lead to deadlock.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/async6.png" alt="async6.png">
+</div>
+</div>
+<div class="paragraph">
+<p>To fix this issues you need to use ConfigureAwait(False) as below  which will make Line 5 and any other code below “await” to run without using the httpContext.
+await Task.Delay(6000).ConfigureAwait(false);</p>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="https://fasigpt.github.io/author/fasigpt/" style="background-image: url(https://avatars0.githubusercontent.com/u/11519211?v&#x3D;3)"><span class="hidden">fasigpt's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="https://fasigpt.github.io/author/fasigpt/">fasigpt</a></h4>
+
+                    <p>Read <a href="https://fasigpt.github.io/author/fasigpt/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Asynchronous%20Programming%20-async%20await%20ConfigureAwait()%20deadlock&amp;url=https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="https://fasigpt.github.io">Its Just the beginning..</a> &copy; 2017</section>
+            <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();
+      </script>
+       
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1497610138670"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1497610138670"></script>
+
+</body>
+</html>
