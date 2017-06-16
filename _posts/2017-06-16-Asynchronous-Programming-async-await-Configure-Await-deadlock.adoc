@@ -1,0 +1,75 @@
+= Asynchronous Programming -async await ConfigureAwait() deadlock
+
+
+:hp-tags: asp.net
+:hp-alt-title: Asynchronous Programming -async await ConfigureAwait() deadlock
+:published_at: 2017-06-16
+ 
+Asynchronous Programming -async await ConfigureAwait() deadlock:
+
+
+If you have not read through these below blogs on async,  then you must before you proceed!
+
+https://msdn.microsoft.com/en-us/magazine/jj991977.aspx
+http://blog.stephencleary.com/2012/02/async-and-await.html
+
+
+Section A: 
+Understanding the request Flow: If you are new to this concept  then you should understand how the request flows and here is one simple example to demonstrate the same.
+
+image::async1.png[]
+
+
+Everything in the above code will be executed Synchronously, till you hit the line which is decorated with “await”. The operation next to it is called “awaitable operation”  which will be asynchronous. 
+
+What happens when we hit await:
+If the awaitable operation is not completed then it returns back to the caller and executes the code in the caller …(few Exceptions though, example if the caller has already been blocked by another await or Task.Wait())
+If the awaitable operation is completed then the next line of code after that wait gets executed synchronously. (will discuss this later..)
+
+To make the above sample simpler, I have added response.write to see the flow of Execution and the output that you would see here is
+
+1, 2, 3,5,4
+
+and it is NOT 1,2,3,4,5 because Line5 and Line6 inside getEmployeeDetailsAsync will not execute till getStudentDetailsAsync has finished executing as there is await getStudentDetailsAsync.
+
+
+Section B: when to use ConfigureAwait()
+
+Once the awaitable operation has finished, the next piece of code of that function will start executing  under  HttpContext (System.Web.HttpContext)  in an asp.net application.
+
+In the above Example, Once Line 4 has finished, Line 5 and Line 6 when they execute they run on a thread linked to asp.net context. The below stack is what you would see when Thread.Sleep is called (Line 4)
+
+image::async2.png[] 
+
+Now, Let’s try to change the code to use ConfigureAwait(false)
+
+image::async3.png[] 
+
+Now, what happens is the Line5 and Line6 will run on Thread Pool thread which is not LINKED to aspnet context. Here is the stack for the same which shows it doesn’t have any aspnet context linked.
+
+image::async4.png[]
+
+
+Why do you need ConfigureAwait()
+
+If you read this blog http://blog.stephencleary.com/2012/02/async-and-await.html you can see this sample. 
+ 
+image::async5.png[]
+ 
+
+Here is what happens on Button1_Click
+
+-Line 1 Will execute
+-call getEmployeeDetailsAsync
+-Line 4 will Execute and because it has an await and “awaitable operation”  is still running, the control is passed back to Button1_Click
+-Line 2 will Execute and since there is a Wait, this will be in hung state and this is what the stack looks like.
+-Line 3 can only Execute if Line 4 can finish. 
+-Now once the Line 4 (awaitable operation) has finished, Line 5 will execute synchronously. 
+-The problem is Line5, to execute that line it needs aspnet context and that context is already linked to below thread which is owned while executing Line 2 and this will lead to deadlock.
+
+image::async6.png[]
+
+To fix this issues you need to use ConfigureAwait(False) as below  which will make Line 5 and any other code below “await” to run without using the httpContext.  
+await Task.Delay(6000).ConfigureAwait(false);  
+
+
