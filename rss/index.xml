@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 16 Jun 2017 10:48:58 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Asynchronous Programming -async await ConfigureAwait() deadlock]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 16 Jun 2017 10:51:57 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Asynchronous Programming -async await ConfigureAwait() deadlock]]></title><description><![CDATA[<div class="paragraph">
 <p>Asynchronous Programming -async await ConfigureAwait() deadlock:</p>
 </div>
 <div class="paragraph">
@@ -93,9 +93,8 @@ If the awaitable operation is completed then the next line of code after that wa
 </div>
 </div>
 <div class="paragraph">
-<p>To fix this issues you need to use ConfigureAwait(False) as below  which will make Line 5 and any other code below “await” to run without using the httpContext.
-await Task.Delay(6000).ConfigureAwait(false);</p>
-</div>]]></description><link>https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html</guid><category><![CDATA[asp.net]]></category><pubDate>Fri, 16 Jun 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[IP Addresses in Azure]]></title><description><![CDATA[<div class="paragraph">
+<p>To fix this issues you need to use ConfigureAwait(False)  which will make Line 5 and any other code below “await” to run without using the httpContext.</p>
+</div>]]></description><link>https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html</guid><category><![CDATA[asp.net]]></category><category><![CDATA[asynchronous programming]]></category><pubDate>Fri, 16 Jun 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[IP Addresses in Azure]]></title><description><![CDATA[<div class="paragraph">
 <p>IP Addresses in Azure:</p>
 </div>
 <div class="paragraph">

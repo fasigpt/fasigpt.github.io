@@ -12,7 +12,7 @@
 
     <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1497610138670" />
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1497610317501" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
     <link rel="canonical" href="https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html" />
@@ -25,6 +25,7 @@
     <meta property="og:url" content="https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html" />
     <meta property="article:published_time" content="2017-06-16T00:00:00.000Z" />
     <meta property="article:tag" content="asp.net" />
+    <meta property="article:tag" content="asynchronous programming" />
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Asynchronous Programming -async await ConfigureAwait() deadlock" />
@@ -45,7 +46,7 @@
     "headline": "Asynchronous Programming -async await ConfigureAwait() deadlock",
     "url": "https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html",
     "datePublished": "2017-06-16T00:00:00.000Z",
-    "keywords": "asp.net",
+    "keywords": "asp.net, asynchronous programming",
     "description": "Asynchronous Programming -async await ConfigureAwait() deadlock: If you have not read through these below blogs on async,  then you must before you proceed! https://msdn.microsoft.com/en-us/magazine/jj991977.aspx http://blog.stephencleary.com/2012/02/async-and-await.html Section A: Understanding the request Flow: If you are new to"
 }
     </script>
@@ -54,7 +55,7 @@
     <link rel="alternate" type="application/rss+xml" title="Its Just the beginning.." href="https://fasigpt.github.io/rss/" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
 </head>
-<body class="post-template tag-aspnet nav-closed">
+<body class="post-template tag-aspnet tag-asynchronous-programming nav-closed">
 
     
 
@@ -70,12 +71,12 @@
 </header>
 
 <main class="content" role="main">
-    <article class="post tag-aspnet">
+    <article class="post tag-aspnet tag-asynchronous-programming">
 
         <header class="post-header">
             <h1 class="post-title">Asynchronous Programming -async await ConfigureAwait() deadlock</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2017-06-16">16 June 2017</time>  on <a href="https://fasigpt.github.io/tag/aspnet/">asp.net</a>
+                <time class="post-date" datetime="2017-06-16">16 June 2017</time>  on <a href="https://fasigpt.github.io/tag/aspnet/">asp.net</a>, <a href="https://fasigpt.github.io/tag/asynchronous-programming/">asynchronous programming</a>
             </section>
         </header>
 
@@ -175,8 +176,7 @@ If the awaitable operation is completed then the next line of code after that wa
 </div>
 </div>
 <div class="paragraph">
-<p>To fix this issues you need to use ConfigureAwait(False) as below  which will make Line 5 and any other code below “await” to run without using the httpContext.
-await Task.Delay(6000).ConfigureAwait(false);</p>
+<p>To fix this issues you need to use ConfigureAwait(False)  which will make Line 5 and any other code below “await” to run without using the httpContext.</p>
 </div>
         </section>
 
@@ -249,8 +249,8 @@ await Task.Delay(6000).ConfigureAwait(false);</p>
        
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1497610138670"></script>
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1497610138670"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1497610317501"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1497610317501"></script>
 
 </body>
 </html>
