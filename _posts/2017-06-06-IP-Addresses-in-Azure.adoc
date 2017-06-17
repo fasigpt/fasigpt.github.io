@@ -1,4 +1,4 @@
-=  IP Addresses in Azure
+= IP Addresses in Azure Virtual Machines[IAAS]
 :hp-tags: azure azure-networking
 :hp-alt-title: IP Addresses in Azure
 :published_at: 2017-06-06
