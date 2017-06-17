@@ -17,9 +17,9 @@ http://blog.stephencleary.com/2012/02/async-and-await.html
 Section A: 
 Understanding the request Flow: If you are new to this concept  then you should understand how the request flows and here is one simple example to demonstrate the same.
 
-<p align="center">
-image::async1.png[]
-</p>
+
+image::async1.png[async,300,200]
+
 
 Everything in the above code will be executed Synchronously, till you hit the line which is decorated with “await”. The operation next to it is called “awaitable operation”  which will be asynchronous. 
 
