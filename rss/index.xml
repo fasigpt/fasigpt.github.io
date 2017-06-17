@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 16 Jun 2017 10:51:57 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Asynchronous Programming -async await ConfigureAwait() deadlock]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 17 Jun 2017 02:09:02 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Asynchronous Programming -async await ConfigureAwait() deadlock]]></title><description><![CDATA[<div class="paragraph">
 <p>Asynchronous Programming -async await ConfigureAwait() deadlock:</p>
 </div>
 <div class="paragraph">
@@ -22,8 +22,10 @@ Understanding the request Flow: If you are new to this concept  then you should 
 </div>
 <div class="paragraph">
 <p>What happens when we hit await:
-If the awaitable operation is not completed then it returns back to the caller and executes the code in the caller …(few Exceptions though, example if the caller has already been blocked by another await or Task.Wait())
-If the awaitable operation is completed then the next line of code after that wait gets executed synchronously. (will discuss this later..)</p>
+If the awaitable operation is not completed then it returns back to the caller and executes the code in the caller …(few Exceptions though, example if the caller has already been blocked by another await or Task.Wait())</p>
+</div>
+<div class="paragraph">
+<p>If the awaitable operation is completed then the next line of code after that wait gets executed synchronously. (will discuss this later..)</p>
 </div>
 <div class="paragraph">
 <p>To make the above sample simpler, I have added response.write to see the flow of Execution and the output that you would see here is</p>
@@ -79,13 +81,25 @@ If the awaitable operation is completed then the next line of code after that wa
 <p>Here is what happens on Button1_Click</p>
 </div>
 <div class="paragraph">
-<p>-Line 1 Will execute
--call getEmployeeDetailsAsync
--Line 4 will Execute and because it has an await and “awaitable operation”  is still running, the control is passed back to Button1_Click
--Line 2 will Execute and since there is a Wait, this will be in hung state and this is what the stack looks like.
--Line 3 can only Execute if Line 4 can finish.
--Now once the Line 4 (awaitable operation) has finished, Line 5 will execute synchronously.
--The problem is Line5, to execute that line it needs aspnet context and that context is already linked to below thread which is owned while executing Line 2 and this will lead to deadlock.</p>
+<p>-Line 1 Will execute</p>
+</div>
+<div class="paragraph">
+<p>-call getEmployeeDetailsAsync</p>
+</div>
+<div class="paragraph">
+<p>-Line 4 will Execute and because it has an await and “awaitable operation”  is still running, the control is passed back to Button1_Click</p>
+</div>
+<div class="paragraph">
+<p>-Line 2 will Execute and since there is a Wait, this will be in hung state and this is what the stack looks like.</p>
+</div>
+<div class="paragraph">
+<p>-Line 3 can only Execute if Line 4 can finish.</p>
+</div>
+<div class="paragraph">
+<p>-Now once the Line 4 (awaitable operation) has finished, Line 5 will execute synchronously.</p>
+</div>
+<div class="paragraph">
+<p>-The problem is Line5, to execute that line it needs aspnet context and that context is already linked to below thread which is owned while executing Line 2 and this will lead to deadlock.</p>
 </div>
 <div class="imageblock">
 <div class="content">

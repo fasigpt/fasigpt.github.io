@@ -12,7 +12,7 @@
 
     <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1497610317501" />
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1497665342572" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
     <link rel="canonical" href="https://fasigpt.github.io/2017/06/16/Asynchronous-Programming-async-await-Configure-Await-deadlock.html" />
@@ -105,8 +105,10 @@ Understanding the request Flow: If you are new to this concept  then you should 
 </div>
 <div class="paragraph">
 <p>What happens when we hit await:
-If the awaitable operation is not completed then it returns back to the caller and executes the code in the caller …(few Exceptions though, example if the caller has already been blocked by another await or Task.Wait())
-If the awaitable operation is completed then the next line of code after that wait gets executed synchronously. (will discuss this later..)</p>
+If the awaitable operation is not completed then it returns back to the caller and executes the code in the caller …(few Exceptions though, example if the caller has already been blocked by another await or Task.Wait())</p>
+</div>
+<div class="paragraph">
+<p>If the awaitable operation is completed then the next line of code after that wait gets executed synchronously. (will discuss this later..)</p>
 </div>
 <div class="paragraph">
 <p>To make the above sample simpler, I have added response.write to see the flow of Execution and the output that you would see here is</p>
@@ -162,13 +164,25 @@ If the awaitable operation is completed then the next line of code after that wa
 <p>Here is what happens on Button1_Click</p>
 </div>
 <div class="paragraph">
-<p>-Line 1 Will execute
--call getEmployeeDetailsAsync
--Line 4 will Execute and because it has an await and “awaitable operation”  is still running, the control is passed back to Button1_Click
--Line 2 will Execute and since there is a Wait, this will be in hung state and this is what the stack looks like.
--Line 3 can only Execute if Line 4 can finish.
--Now once the Line 4 (awaitable operation) has finished, Line 5 will execute synchronously.
--The problem is Line5, to execute that line it needs aspnet context and that context is already linked to below thread which is owned while executing Line 2 and this will lead to deadlock.</p>
+<p>-Line 1 Will execute</p>
+</div>
+<div class="paragraph">
+<p>-call getEmployeeDetailsAsync</p>
+</div>
+<div class="paragraph">
+<p>-Line 4 will Execute and because it has an await and “awaitable operation”  is still running, the control is passed back to Button1_Click</p>
+</div>
+<div class="paragraph">
+<p>-Line 2 will Execute and since there is a Wait, this will be in hung state and this is what the stack looks like.</p>
+</div>
+<div class="paragraph">
+<p>-Line 3 can only Execute if Line 4 can finish.</p>
+</div>
+<div class="paragraph">
+<p>-Now once the Line 4 (awaitable operation) has finished, Line 5 will execute synchronously.</p>
+</div>
+<div class="paragraph">
+<p>-The problem is Line5, to execute that line it needs aspnet context and that context is already linked to below thread which is owned while executing Line 2 and this will lead to deadlock.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -249,8 +263,8 @@ If the awaitable operation is completed then the next line of code after that wa
        
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1497610317501"></script>
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1497610317501"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1497665342572"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1497665342572"></script>
 
 </body>
 </html>
