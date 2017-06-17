@@ -24,6 +24,7 @@ Everything in the above code will be executed Synchronously, till you hit the li
 
 What happens when we hit await:
 If the awaitable operation is not completed then it returns back to the caller and executes the code in the caller …(few Exceptions though, example if the caller has already been blocked by another await or Task.Wait())
+
 If the awaitable operation is completed then the next line of code after that wait gets executed synchronously. (will discuss this later..)
 
 To make the above sample simpler, I have added response.write to see the flow of Execution and the output that you would see here is
@@ -60,12 +61,19 @@ image::async5.png[]
 Here is what happens on Button1_Click
 
 -Line 1 Will execute
+
 -call getEmployeeDetailsAsync
+
 -Line 4 will Execute and because it has an await and “awaitable operation”  is still running, the control is passed back to Button1_Click
+
 -Line 2 will Execute and since there is a Wait, this will be in hung state and this is what the stack looks like.
+
 -Line 3 can only Execute if Line 4 can finish. 
+
 -Now once the Line 4 (awaitable operation) has finished, Line 5 will execute synchronously. 
+
 -The problem is Line5, to execute that line it needs aspnet context and that context is already linked to below thread which is owned while executing Line 2 and this will lead to deadlock.
+
 
 image::async6.png[]
 
