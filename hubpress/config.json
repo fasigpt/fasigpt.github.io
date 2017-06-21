@@ -27,7 +27,7 @@
   },
   "site": {
     "title": "Its Just the beginning..",
-    "description": "Welcome to this blogging Site",
+    "description": "Welcome to this blogging Site <a href="fasigpt@gmail.com"/>",
     "logo": "",
     "cover": "",
     "delay": "",
@@ -36,7 +36,7 @@
     "disqus": ""
   },
   "socialnetwork": {
-    "email": "",
+    "email": "fasigpt@gmail.com",
     "github": "",
     "twitter": "",
     "facebook": "",
