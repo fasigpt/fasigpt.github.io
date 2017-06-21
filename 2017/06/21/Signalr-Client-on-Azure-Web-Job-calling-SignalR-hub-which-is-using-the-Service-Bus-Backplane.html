@@ -12,7 +12,7 @@
 
     <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1498023351914" />
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1498023473194" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
     <link rel="canonical" href="https://fasigpt.github.io/2017/06/21/Signalr-Client-on-Azure-Web-Job-calling-SignalR-hub-which-is-using-the-Service-Bus-Backplane.html" />
@@ -90,7 +90,7 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://fasigpt.github.io/images/SignalRPNG.png" alt="SignalRPNG.png">
+<img src="https://fasigpt.github.io/images/SignalRPNG.PNG" alt="SignalRPNG.PNG">
 </div>
 </div>
 <div class="paragraph">
@@ -123,12 +123,8 @@ public static async Task signalrtask(TextWriter log)
 <pre>var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
 hubConnection.TraceLevel = TraceLevels.All;
 hubConnection.TraceWriter = Console.Out;
-IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>hubProxy.On("Send", data =&gt;
+IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");
+hubProxy.On("Send", data =&gt;
 {
    //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
   log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
@@ -219,8 +215,8 @@ IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");</pre>
        
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1498023351914"></script>
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1498023351914"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1498023473194"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1498023473194"></script>
 
 </body>
 </html>
