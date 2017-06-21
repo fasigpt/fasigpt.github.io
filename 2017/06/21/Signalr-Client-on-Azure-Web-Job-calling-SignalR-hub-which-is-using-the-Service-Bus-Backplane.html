@@ -12,7 +12,7 @@
 
     <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1498023473194" />
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1498023688692" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
     <link rel="canonical" href="https://fasigpt.github.io/2017/06/21/Signalr-Client-on-Azure-Web-Job-calling-SignalR-hub-which-is-using-the-Service-Bus-Backplane.html" />
@@ -108,37 +108,25 @@
 <div class="literalblock">
 <div class="content">
 <pre>var host = new JobHost();
- host.CallAsync(typeof(Functions).GetMethod("signalrtask"));</pre>
+host.CallAsync(typeof(Functions).GetMethod("signalrtask"));</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre> [NoAutomaticTrigger]
+<pre>[NoAutomaticTrigger]
 public static async Task signalrtask(TextWriter log)
-{</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
-hubConnection.TraceLevel = TraceLevels.All;
-hubConnection.TraceWriter = Console.Out;
-IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");
-hubProxy.On("Send", data =&gt;
 {
-   //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
-  log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
-});</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>await hubConnection.Start();</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>}</pre>
+    var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
+    hubConnection.TraceLevel = TraceLevels.All;
+    hubConnection.TraceWriter = Console.Out;
+    IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");
+    hubProxy.On("Send", data =&gt;
+    {
+       //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+      log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+    });
+    await hubConnection.Start();
+}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -215,8 +203,8 @@ hubProxy.On("Send", data =&gt;
        
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1498023473194"></script>
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1498023473194"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1498023688692"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1498023688692"></script>
 
 </body>
 </html>

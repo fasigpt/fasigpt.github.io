@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 21 Jun 2017 05:37:53 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Signalr Client on Azure WebJob calling SignalR hub]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 21 Jun 2017 05:41:28 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Signalr Client on Azure WebJob calling SignalR hub]]></title><description><![CDATA[<div class="paragraph">
 <p>Signalr Client on Azure WebJob calling SignalR hub which is using the ServiceBus Backplane:</p>
 </div>
 <div class="paragraph">
@@ -24,37 +24,25 @@
 <div class="literalblock">
 <div class="content">
 <pre>var host = new JobHost();
- host.CallAsync(typeof(Functions).GetMethod("signalrtask"));</pre>
+host.CallAsync(typeof(Functions).GetMethod("signalrtask"));</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre> [NoAutomaticTrigger]
+<pre>[NoAutomaticTrigger]
 public static async Task signalrtask(TextWriter log)
-{</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
-hubConnection.TraceLevel = TraceLevels.All;
-hubConnection.TraceWriter = Console.Out;
-IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");
-hubProxy.On("Send", data =&gt;
 {
-   //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
-  log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
-});</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>await hubConnection.Start();</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>}</pre>
+    var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
+    hubConnection.TraceLevel = TraceLevels.All;
+    hubConnection.TraceWriter = Console.Out;
+    IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");
+    hubProxy.On("Send", data =&gt;
+    {
+       //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+      log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+    });
+    await hubConnection.Start();
+}</pre>
 </div>
 </div>
 <div class="paragraph">
