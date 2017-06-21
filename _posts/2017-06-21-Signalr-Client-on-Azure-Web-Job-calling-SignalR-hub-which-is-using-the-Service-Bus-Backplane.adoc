@@ -17,13 +17,12 @@ WebJob:
 
 It has an async method called signalrtask which ends up calling the signalRHub (hosted on WebRole) and if you look at the WebJOb Dashboard you should see all the chat messages sent from all other clients including browser and .Net Client.
 
-           var host = new JobHost();
-            host.CallAsync(typeof(Functions).GetMethod("signalrtask"));
+          var host = new JobHost();
+          host.CallAsync(typeof(Functions).GetMethod("signalrtask"));
 
-         [NoAutomaticTrigger]
+        [NoAutomaticTrigger]
         public static async Task signalrtask(TextWriter log)
         {
-
             var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
             hubConnection.TraceLevel = TraceLevels.All;
             hubConnection.TraceWriter = Console.Out;
@@ -33,10 +32,7 @@ It has an async method called signalrtask which ends up calling the signalRHub (
                //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
               log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
             });
-
             await hubConnection.Start();
-
-
         }
 
 
