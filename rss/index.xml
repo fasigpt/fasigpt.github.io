@@ -1,4 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 17 Jun 2017 05:29:05 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Asynchronous Programming -async await ConfigureAwait() deadlock]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 21 Jun 2017 05:35:51 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Signalr Client on Azure WebJob calling SignalR hub]]></title><description><![CDATA[<div class="paragraph">
+<p>Signalr Client on Azure WebJob calling SignalR hub which is using the ServiceBus Backplane:</p>
+</div>
+<div class="paragraph">
+<p>I have written an end to end sample that demonstrates Signalr [hosted on Azure Web Role] using the Azure ServiceBus. The Sample also includes SignalrClient hosted in Azure WebJob which calls the SignalR Hub and also a .NET Client (on prem) calling the SignalR Hub.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/SignalRPNG.png" alt="SignalRPNG.png">
+</div>
+</div>
+<div class="paragraph">
+<p>SignalR Service:</p>
+</div>
+<div class="paragraph">
+<p>The Service has endpoint configured for Service bus inside the Startup.cs as described here <a href="https://docs.microsoft.com/en-us/aspnet/signalr/overview/performance/scaleout-with-windows-azure-service-bus" class="bare">https://docs.microsoft.com/en-us/aspnet/signalr/overview/performance/scaleout-with-windows-azure-service-bus</a> and has a ChatHub.</p>
+</div>
+<div class="paragraph">
+<p>WebJob:</p>
+</div>
+<div class="paragraph">
+<p>It has an async method called signalrtask which ends up calling the signalRHub (hosted on WebRole) and if you look at the WebJOb Dashboard you should see all the chat messages sent from all other clients including browser and .Net Client.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>var host = new JobHost();
+ host.CallAsync(typeof(Functions).GetMethod("signalrtask"));</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre> [NoAutomaticTrigger]
+public static async Task signalrtask(TextWriter log)
+{</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
+hubConnection.TraceLevel = TraceLevels.All;
+hubConnection.TraceWriter = Console.Out;
+IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>hubProxy.On("Send", data =&gt;
+{
+   //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+  log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+});</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>await hubConnection.Start();</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can view the Full Sample here <a href="https://github.com/fasigpt/webjobs-Servicebus-signalRonWebRole" class="bare">https://github.com/fasigpt/webjobs-Servicebus-signalRonWebRole</a></p>
+</div>]]></description><link>https://fasigpt.github.io/2017/06/21/Signalr-Client-on-Azure-Web-Job-calling-SignalR-hub-which-is-using-the-Service-Bus-Backplane.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/06/21/Signalr-Client-on-Azure-Web-Job-calling-SignalR-hub-which-is-using-the-Service-Bus-Backplane.html</guid><category><![CDATA[WebJobs]]></category><category><![CDATA[azure]]></category><category><![CDATA[SignalR]]></category><pubDate>Wed, 21 Jun 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Asynchronous Programming -async await ConfigureAwait() deadlock]]></title><description><![CDATA[<div class="paragraph">
 <p>Asynchronous Programming -async await ConfigureAwait() deadlock:</p>
 </div>
 <div class="paragraph">
