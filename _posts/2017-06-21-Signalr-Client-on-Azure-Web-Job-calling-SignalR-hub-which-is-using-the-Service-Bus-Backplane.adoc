@@ -1,0 +1,44 @@
+= Signalr Client on Azure WebJob calling SignalR hub 
+:hp-tags: WebJobs,azure,SignalR
+:hp-alt-title: Signalr Client on Azure WebJob calling SignalR hub which is using the ServiceBus Backplane
+:published_at: 2017-06-21
+
+Signalr Client on Azure WebJob calling SignalR hub which is using the ServiceBus Backplane:
+
+I have written an end to end sample that demonstrates Signalr [hosted on Azure Web Role] using the Azure ServiceBus. The Sample also includes SignalrClient hosted in Azure WebJob which calls the SignalR Hub and also a .NET Client (on prem) calling the SignalR Hub.
+
+image::SignalRPNG.png[]
+
+SignalR Service:
+
+The Service has endpoint configured for Service bus inside the Startup.cs as described here https://docs.microsoft.com/en-us/aspnet/signalr/overview/performance/scaleout-with-windows-azure-service-bus and has a ChatHub.
+
+WebJob:
+
+It has an async method called signalrtask which ends up calling the signalRHub (hosted on WebRole) and if you look at the WebJOb Dashboard you should see all the chat messages sent from all other clients including browser and .Net Client.
+
+           var host = new JobHost();
+            host.CallAsync(typeof(Functions).GetMethod("signalrtask"));
+
+         [NoAutomaticTrigger]
+        public static async Task signalrtask(TextWriter log)
+        {
+
+            var hubConnection = new HubConnection("http://signalrservicewebrole.cloudapp.net/");
+            hubConnection.TraceLevel = TraceLevels.All;
+            hubConnection.TraceWriter = Console.Out;
+            IHubProxy hubProxy = hubConnection.CreateHubProxy("ChatHub");
+
+            hubProxy.On("Send", data =>
+            {
+               //Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+              log.WriteLine("Incoming data: {0} {1}", data.name, data.message);
+            });
+
+            await hubConnection.Start();
+
+
+        }
+
+
+You can view the Full Sample here https://github.com/fasigpt/webjobs-Servicebus-signalRonWebRole 
