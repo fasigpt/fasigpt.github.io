@@ -25,7 +25,7 @@ image::aspnetcore2.png[]
 
 The first two method will store those keys in the azure blob storage and in your local registry respectively. The file system will create the keys in a remote/local share and its basically an xml file
 
- image::aspnetcore3.png[]
+image::aspnetcore3.png[]
  
  
 
