@@ -1,0 +1,34 @@
+= asp.net core with cookie authentication in web farm scenario
+
+:hp-tags: asp.net core, webfarm
+:hp-alt-title: asp.net core with cookie authentication in web farm scenario
+:published_at: 2017-07-30
+
+When you host your application on multiple IIS servers behind a load balancer, you must take care of storing sessions and using same machine keys on all servers to encrypt cookie and view state. When you create machine keys especially at the IIS root level, the keys are stored in the applicationhost.config file. This config file is IIS specific and only IIS process will read the configuration. In the asp.net core world, the hosting is little different, the IIS process only acts as a reverse proxy through the aspnetcoremodule.
+
+<system.webServer>
+    <handlers>
+      <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+    </handlers>
+    <aspNetCore processPath="dotnet" arguments=".\youraspnetcore.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" />
+  </system.webServer>
+
+The actual process which hosts your code is dotnet.exe running behind IIS process and it cannot access apphost.config file. Because of this architecture, we provide different storage mechanisms to store the encryption keys like file system, Azure Blobs, Registry, Custom Storage (IXmlRepository EX : SQL) through the Microsoft.AspNetCore.DataProtection namespace.
+
+
+ 
+
+image::aspnetcore1.png[]
+
+In the above diagram, we have two IIS Servers hosting asp.net core code behind a load balancer like ARR. To configure your application to store these keys, you need to set that up in the “ConfigureServices” method.
+
+
+ 
+
+image:: aspnetcore2.png[]
+
+The first two method will store those keys in the azure blob storage and in your local registry respectively. The file system will create the keys in a remote/local share and its basically an xml file
+
+ 
+
+image:: aspnetcore3.png[]
