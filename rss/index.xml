@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 21 Jun 2017 05:41:28 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Signalr Client on Azure WebJob calling SignalR hub]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sun, 30 Jul 2017 10:39:07 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[asp.net core with cookie authentication in web farm scenario]]></title><description><![CDATA[<div class="paragraph">
+<p>When you host your application on multiple IIS servers behind a load balancer, you must take care of storing sessions and using same machine keys on all servers to encrypt cookie and view state. When you create machine keys especially at the IIS root level, the keys are stored in the applicationhost.config file. This config file is IIS specific and only IIS process will read the configuration. In the asp.net core world, the hosting is little different, the IIS process only acts as a reverse proxy through the aspnetcoremodule.</p>
+</div>
+<div class="paragraph">
+<p>&lt;system.webServer&gt;
+    &lt;handlers&gt;
+      &lt;add name="aspNetCore" path="<strong>" verb="</strong>" modules="AspNetCoreModule" resourceType="Unspecified" /&gt;
+    &lt;/handlers&gt;
+    &lt;aspNetCore processPath="dotnet" arguments=".\youraspnetcore.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" /&gt;
+  &lt;/system.webServer&gt;</p>
+</div>
+<div class="paragraph">
+<p>The actual process which hosts your code is dotnet.exe running behind IIS process and it cannot access apphost.config file. Because of this architecture, we provide different storage mechanisms to store the encryption keys like file system, Azure Blobs, Registry, Custom Storage (IXmlRepository EX : SQL) through the Microsoft.AspNetCore.DataProtection namespace.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/aspnetcore1.png" alt="aspnetcore1.png">
+</div>
+</div>
+<div class="paragraph">
+<p>In the above diagram, we have two IIS Servers hosting asp.net core code behind a load balancer like ARR. To configure your application to store these keys, you need to set that up in the “ConfigureServices” method.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">image</dt>
+<dd>
+<p>aspnetcore2.png[]</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The first two method will store those keys in the azure blob storage and in your local registry respectively. The file system will create the keys in a remote/local share and its basically an xml file</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">image</dt>
+<dd>
+<p>aspnetcore3.png[]</p>
+</dd>
+</dl>
+</div>]]></description><link>https://fasigpt.github.io/2017/07/30/aspnet-core-with-cookie-authentication-in-web-farm-scenario.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/07/30/aspnet-core-with-cookie-authentication-in-web-farm-scenario.html</guid><category><![CDATA[asp.net core]]></category><category><![CDATA[webfarm]]></category><pubDate>Sun, 30 Jul 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Signalr Client on Azure WebJob calling SignalR hub]]></title><description><![CDATA[<div class="paragraph">
 <p>Signalr Client on Azure WebJob calling SignalR hub which is using the ServiceBus Backplane:</p>
 </div>
 <div class="paragraph">
