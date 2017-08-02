@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 02 Aug 2017 13:36:27 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Fiddler with asp.net core and configure asp.net core as a reverse proxy.]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 02 Aug 2017 13:37:43 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Fiddler with asp.net core and configure asp.net core as a reverse proxy.]]></title><description><![CDATA[<div class="paragraph">
 <p>Scenario 1: Configure Fiddler to capture outgoing requests from asp.net core process</p>
 </div>
 <div class="paragraph">
@@ -12,11 +12,6 @@
 <div class="paragraph">
 <p>Now, you need configure HttpClientHandler in your controller with the custom class (MyHttpProxy) to feed the fiddler  proxy settings</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/aspnetproxy2.png" alt="aspnetproxy2.png">
-</div>
-</div>
 <div class="paragraph">
 <p>Now, the outgoing call from the methods should be proxied through fiddler.</p>
 </div>
@@ -25,6 +20,11 @@
 </div>
 <div class="paragraph">
 <p>We can run asp.net core acting as a reverse proxy, wherein it can route the requests to another backend web server. In the below diagram the client talks to asp.net core over port 443 and asp.net core routes the request  to backend service over port 80</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/aspnetproxy2.png" alt="aspnetproxy2.png">
+</div>
 </div>
 <div class="paragraph">
 <p>There are only couple of things you need to do:</p>
