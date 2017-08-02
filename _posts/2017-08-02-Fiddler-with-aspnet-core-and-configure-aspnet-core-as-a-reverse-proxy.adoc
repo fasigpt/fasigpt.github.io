@@ -17,16 +17,13 @@ image::aspnetproxy1.png[]
 
 Now, you need configure HttpClientHandler in your controller with the custom class (MyHttpProxy) to feed the fiddler  proxy settings
 
-image::aspnetproxy2.png[]
-
-
 Now, the outgoing call from the methods should be proxied through fiddler.
 
 Scenario2: Configure asp.net core process to act as a reverse proxy
 
 We can run asp.net core acting as a reverse proxy, wherein it can route the requests to another backend web server. In the below diagram the client talks to asp.net core over port 443 and asp.net core routes the request  to backend service over port 80
  
-
+image::aspnetproxy2.png[]
 
 There are only couple of things you need to do:
 
