@@ -1,38 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sun, 30 Jul 2017 10:45:24 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[asp.net core with cookie authentication in web farm scenario]]></title><description><![CDATA[<div class="paragraph">
-<p>When you host your application on multiple IIS servers behind a load balancer, you must take care of storing sessions and using same machine keys on all servers to encrypt cookie and view state. When you create machine keys especially at the IIS root level, the keys are stored in the applicationhost.config file. This config file is IIS specific and only IIS process will read the configuration. In the asp.net core world, the hosting is little different, the IIS process only acts as a reverse proxy through the aspnetcoremodule.</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 02 Aug 2017 13:36:27 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Fiddler with asp.net core and configure asp.net core as a reverse proxy.]]></title><description><![CDATA[<div class="paragraph">
+<p>Scenario 1: Configure Fiddler to capture outgoing requests from asp.net core process</p>
 </div>
 <div class="paragraph">
-<p>&lt;system.webServer&gt;
-    &lt;handlers&gt;
-      &lt;add name="aspNetCore" path="<strong>" verb="</strong>" modules="AspNetCoreModule" resourceType="Unspecified" /&gt;
-    &lt;/handlers&gt;
-    &lt;aspNetCore processPath="dotnet" arguments=".\youraspnetcore.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" /&gt;
-  &lt;/system.webServer&gt;</p>
-</div>
-<div class="paragraph">
-<p>The actual process which hosts your code is dotnet.exe running behind IIS process and it cannot access apphost.config file. Because of this architecture, we provide different storage mechanisms to store the encryption keys like file system, Azure Blobs, Registry, Custom Storage (IXmlRepository EX : SQL) through the Microsoft.AspNetCore.DataProtection namespace.</p>
+<p>You need to define a custom Class Implementing IWebProxy as below</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://fasigpt.github.io/images/aspnetcore1.png" alt="aspnetcore1.png">
+<img src="https://fasigpt.github.io/images/aspnetproxy1.png" alt="aspnetproxy1.png">
 </div>
 </div>
 <div class="paragraph">
-<p>In the above diagram, we have two IIS Servers hosting asp.net core code behind a load balancer like ARR. To configure your application to store these keys, you need to set that up in the “ConfigureServices” method.</p>
+<p>Now, you need configure HttpClientHandler in your controller with the custom class (MyHttpProxy) to feed the fiddler  proxy settings</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://fasigpt.github.io/images/aspnetcore2.png" alt="aspnetcore2.png">
+<img src="https://fasigpt.github.io/images/aspnetproxy2.png" alt="aspnetproxy2.png">
 </div>
 </div>
 <div class="paragraph">
-<p>The first two method will store those keys in the azure blob storage and in your local registry respectively. The file system will create the keys in a remote/local share and its basically an xml file</p>
+<p>Now, the outgoing call from the methods should be proxied through fiddler.</p>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>Scenario2: Configure asp.net core process to act as a reverse proxy</p>
+</div>
+<div class="paragraph">
+<p>We can run asp.net core acting as a reverse proxy, wherein it can route the requests to another backend web server. In the below diagram the client talks to asp.net core over port 443 and asp.net core routes the request  to backend service over port 80</p>
+</div>
+<div class="paragraph">
+<p>There are only couple of things you need to do:</p>
+</div>
+<div class="literalblock">
 <div class="content">
-<img src="https://fasigpt.github.io/images/aspnetcore3.png" alt="aspnetcore3.png">
+<pre>Install Nuget Package “Microsoft.AspNetCore.Proxy”</pre>
 </div>
-</div>]]></description><link>https://fasigpt.github.io/2017/07/30/aspnet-core-with-cookie-authentication-in-web-farm-scenario.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/07/30/aspnet-core-with-cookie-authentication-in-web-farm-scenario.html</guid><category><![CDATA[asp.net core]]></category><category><![CDATA[webfarm]]></category><pubDate>Sun, 30 Jul 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Signalr Client on Azure WebJob calling SignalR hub]]></title><description><![CDATA[<div class="paragraph">
+</div>
+<div class="paragraph">
+<p>Configure the proxy middleware in the startup.cs</p>
+</div>
+<div class="paragraph">
+<p>ProxyOptions proxyOptions = new ProxyOptions();
+            proxyOptions.Host = "yourbackendserver";
+            proxyOptions.Scheme = "http";
+            proxyOptions.Port = "80";</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>app.RunProxy(proxyOptions);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>you can download the complete sample here  <a href="https://github.com/fasigpt/fiddlerwithaspnetcore" class="bare">https://github.com/fasigpt/fiddlerwithaspnetcore</a></p>
+</div>]]></description><link>https://fasigpt.github.io/2017/08/02/Fiddler-with-aspnet-core-and-configure-aspnet-core-as-a-reverse-proxy.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/08/02/Fiddler-with-aspnet-core-and-configure-aspnet-core-as-a-reverse-proxy.html</guid><category><![CDATA[asp.net core]]></category><category><![CDATA[fiddler]]></category><category><![CDATA[proxy]]></category><pubDate>Wed, 02 Aug 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Signalr Client on Azure WebJob calling SignalR hub]]></title><description><![CDATA[<div class="paragraph">
 <p>Signalr Client on Azure WebJob calling SignalR hub which is using the ServiceBus Backplane:</p>
 </div>
 <div class="paragraph">
