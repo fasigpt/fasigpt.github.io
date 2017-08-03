@@ -13,9 +13,12 @@ You need to define a custom Class Implementing IWebProxy as below
 
  
 
-image::aspnetproxy1.png[]
+image::aspnetproxy3.png[]
 
 Now, you need configure HttpClientHandler in your controller with the custom class (MyHttpProxy) to feed the fiddler  proxy settings
+
+image::aspnetproxy1.png[]
+
 
 Now, the outgoing call from the methods should be proxied through fiddler.
 
