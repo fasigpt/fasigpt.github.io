@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 03 Aug 2017 09:27:18 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Fiddler with asp.net core and configure asp.net core as a reverse proxy.]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 03 Aug 2017 09:32:58 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Fiddler with asp.net core and configure asp.net core as a reverse proxy.]]></title><description><![CDATA[<div class="paragraph">
 <p>Scenario 1: Configure Fiddler to capture outgoing requests from asp.net core process</p>
 </div>
 <div class="paragraph">
@@ -6,11 +6,16 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://fasigpt.github.io/images/aspnetproxy1.png" alt="aspnetproxy1.png">
+<img src="https://fasigpt.github.io/images/aspnetproxy3.png" alt="aspnetproxy3.png">
 </div>
 </div>
 <div class="paragraph">
 <p>Now, you need configure HttpClientHandler in your controller with the custom class (MyHttpProxy) to feed the fiddler  proxy settings</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/aspnetproxy1.png" alt="aspnetproxy1.png">
+</div>
 </div>
 <div class="paragraph">
 <p>Now, the outgoing call from the methods should be proxied through fiddler.</p>
