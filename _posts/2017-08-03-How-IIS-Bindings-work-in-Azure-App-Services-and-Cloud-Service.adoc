@@ -18,7 +18,7 @@ image::binding2.png[]
 
 There is one Virtual IP (Public IP : 1.2.3.4) for the cloud service itself and each of these Nodes will have one internal IP (Node1=10.10.10.10,Node2=10.10.10.11) . Now, at the IIS level in each of these Nodes one IP:PORT binding will be created, what is important is there is no HOST NAME mapped to this binding. The HOST NAME text box above is empty as you can see in the above image.
 
-Observations:
+Observations
 
 image::binding3.png[]
 
@@ -30,7 +30,7 @@ In the below diagram we can see that when you create a app Service there will be
 image::binding4.png[]
  
 
-Observations:
+Observations
 
 image::binding5.png[]
 
