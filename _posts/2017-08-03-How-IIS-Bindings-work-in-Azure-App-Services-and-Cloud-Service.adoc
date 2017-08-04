@@ -1,0 +1,44 @@
+= How IIS Bindings work in  Azure App Services and Cloud Service
+
+:hp-tags: azure,app service,cloud service,traffic manager,404,IIS binding
+:hp-alt-title: How IIS Bindings work in  Azure App Services and Cloud Service 
+:published_at: 2017-08-03
+
+How IIS Bindings work in  Azure App Services and Cloud Service 
+
+In this blog I will try to Explain how bindings are created when you create a Azure Cloud Service and Azure Web App. In the below picture we have a Cloud Service called “contoso.cloudapp.net” and there are two instances of this service running in two different machines (Node1 and Node2). 
+
+image::binding1.png[] 
+
+
+
+image::binding2.png[]
+ 
+
+
+There is one Virtual IP (Public IP : 1.2.3.4) for the cloud service itself and each of these Nodes will have one internal IP (Node1=10.10.10.10,Node2=10.10.10.11) . Now, at the IIS level in each of these Nodes one IP:PORT binding will be created, what is important is there is no HOST NAME mapped to this binding. The HOST NAME text box above is empty as you can see in the above image.
+
+Observations:
+
+image::binding3.png[]
+
+
+In the above observations table we can see the website will load in all scenarios as the binding is set IP:PORT and there is no HOSTNAME.Now, lets see how this defers when we use app Service.
+
+In the below diagram we can see that when you create a app Service there will be HOSTNAME associated with the binding.
+
+image::binding4.png[]
+ 
+
+Observations:
+
+image::binding5.png[]
+
+image::binding6.png[]
+
+
+The 404 error is thrown by the ARR, as it would have got internal 404 from the backend NODE rejected by http.sys (404 – NotFound) which expects the request to have HOSTHEADER matching with contoso.azurewebsites.net. Now, if you have traffic manager in front of your app service then another binding will be created with the matching HOSTNAME of your traffic manager. (Here azureAppServicehost is the site name and azuretrafficmanagerhost.trafficmanager.net is the traffic manager Host)
+
+So technically only requests that have these two host headers will work azure app Service unlike Azure Cloud Service.
+
+image::binding7.png[]
