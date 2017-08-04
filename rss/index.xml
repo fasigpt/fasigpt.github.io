@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 04 Aug 2017 15:20:48 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Fiddler with asp.net core and configure asp.net core as a reverse proxy.]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 04 Aug 2017 15:22:19 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Fiddler with asp.net core and configure asp.net core as a reverse proxy.]]></title><description><![CDATA[<div class="paragraph">
 <p>Scenario 1: Configure Fiddler to capture outgoing requests from asp.net core process</p>
 </div>
 <div class="paragraph">
@@ -452,68 +452,7 @@ Create the Active Directory b2c Connect using the steps outlined here <a href="h
 </div>
 <div class="paragraph">
 <p>Now go ahead and launch the default site of your site and it should take you to the login page on which you can enter the newly created user and password. Once the user is authenticated you should see the Home/Index page loading with the username listed.</p>
-</div>]]></description><link>https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html</guid><category><![CDATA[asp.net]]></category><pubDate>Wed, 31 May 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[How IIS Bindings work in  Azure App Service and Cloud Service]]></title><description><![CDATA[<div class="paragraph">
-<p>How IIS Bindings work in  Azure App Service and Cloud Service</p>
-</div>
-<div class="paragraph">
-<p>In this blog I will try to Explain how bindings are created when you create a Azure Cloud Service and Azure Web App. In the below picture we have a Cloud Service called “contoso.cloudapp.net” and there are two instances of this service running in two different machines (Node1 and Node2).</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding1.png" alt="binding1.png">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding2.png" alt="binding2.png">
-</div>
-</div>
-<div class="paragraph">
-<p>There is one Virtual IP (Public IP : 1.2.3.4) for the cloud service itself and each of these Nodes will have one internal IP (Node1=10.10.10.10,Node2=10.10.10.11) . Now, at the IIS level in each of these Nodes one IP:PORT binding will be created, what is important is there is no HOST NAME mapped to this binding. The HOST NAME text box above is empty as you can see in the above image.</p>
-</div>
-<div class="paragraph">
-<p>Observations:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding3.png" alt="binding3.png">
-</div>
-</div>
-<div class="paragraph">
-<p>In the above observations table we can see the website will load in all scenarios as the binding is set IP:PORT and there is no HOSTNAME.Now, lets see how this defers when we use app Service.</p>
-</div>
-<div class="paragraph">
-<p>In the below diagram we can see that when you create a app Service there will be HOSTNAME associated with the binding.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding4.png" alt="binding4.png">
-</div>
-</div>
-<div class="paragraph">
-<p>Observations:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding5.png" alt="binding5.png">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding6.png" alt="binding6.png">
-</div>
-</div>
-<div class="paragraph">
-<p>The 404 error is thrown by the ARR, as it would have got internal 404 from the backend NODE rejected by http.sys (404 – NotFound) which expects the request to have HOSTHEADER matching with contoso.azurewebsites.net. Now, if you have traffic manager in front of your app service then another binding will be created with the matching HOSTNAME of your traffic manager. (Here azureAppServicehost is the site name and azuretrafficmanagerhost.trafficmanager.net is the traffic manager Host)</p>
-</div>
-<div class="paragraph">
-<p>So technically only requests that have these two host headers will work azure app Service unlike Azure Cloud Service.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding7.png" alt="binding7.png">
-</div>
-</div>]]></description><link>https://fasigpt.github.io/2017/05/31/How-IIS-Bindings-work-in-Azure-App-Service-and-Cloud-Service.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/05/31/How-IIS-Bindings-work-in-Azure-App-Service-and-Cloud-Service.html</guid><category><![CDATA[azure]]></category><category><![CDATA[app service]]></category><category><![CDATA[cloud service]]></category><category><![CDATA[traffic manager]]></category><category><![CDATA[404]]></category><category><![CDATA[IIS binding]]></category><pubDate>Wed, 31 May 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Introduction to .Net Libaries and Runtime BaseClassLibrary-vs-CLR-CoreFx-vs-CoreClr]]></title><description><![CDATA[<div class="paragraph">
+</div>]]></description><link>https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html</link><guid isPermaLink="true">https://fasigpt.github.io/2017/05/31/Implementing-Authentication-in-an-ASPNET-Core-application-using-Azure-Active-Directory.html</guid><category><![CDATA[asp.net]]></category><pubDate>Wed, 31 May 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[Introduction to .Net Libaries and Runtime BaseClassLibrary-vs-CLR-CoreFx-vs-CoreClr]]></title><description><![CDATA[<div class="paragraph">
 <p>Base Class Library v/s CLR:</p>
 </div>
 <div class="paragraph">
