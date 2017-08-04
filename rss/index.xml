@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 04 Aug 2017 15:25:58 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[How IIS Bindings work in  Azure App Services and Cloud Service]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 04 Aug 2017 17:11:50 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[How IIS Bindings work in  Azure App Services and Cloud Service]]></title><description><![CDATA[<div class="paragraph">
 <p>How IIS Bindings work in  Azure App Services and Cloud Service</p>
 </div>
 <div class="paragraph">
@@ -18,7 +18,7 @@
 <p>There is one Virtual IP (Public IP : 1.2.3.4) for the cloud service itself and each of these Nodes will have one internal IP (Node1=10.10.10.10,Node2=10.10.10.11) . Now, at the IIS level in each of these Nodes one IP:PORT binding will be created, what is important is there is no HOST NAME mapped to this binding. The HOST NAME text box above is empty as you can see in the above image.</p>
 </div>
 <div class="paragraph">
-<p>Observations:</p>
+<p>Observations</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -37,7 +37,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Observations:</p>
+<p>Observations</p>
 </div>
 <div class="imageblock">
 <div class="content">
