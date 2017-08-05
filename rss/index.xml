@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 05 Aug 2017 07:00:25 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[How IIS Bindings work in  Azure App Services and Cloud Service]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 05 Aug 2017 09:24:08 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[How IIS Bindings work in  Azure App Services and Cloud Service]]></title><description><![CDATA[<div class="paragraph">
 <p>How IIS Bindings work in  Azure App Services and Cloud Service</p>
 </div>
 <div class="paragraph">
@@ -20,13 +20,10 @@
 <div class="paragraph">
 <p>Observations</p>
 </div>
-<div class="paragraph">
-<p>URL													Result
-<a href="http://1.2.3.4" class="bare">http://1.2.3.4</a>										Success (Website Loads fine)
-<a href="http://contoso.cloudapp.net" class="bare">http://contoso.cloudapp.net</a> 						Success (Website Loads fine)
-<a href="http://customhostname" class="bare">http://customhostname</a> 								Success (Website Loads fine)
-(ex-hostname created in the
-client HOST file pointing to ip 1.2.3.4)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/binding3.png" alt="binding3.png">
+</div>
 </div>
 <div class="paragraph">
 <p>In the above observations table we can see the website will load in all scenarios as the binding is set IP:PORT and there is no HOSTNAME.Now, lets see how this defers when we use app Service.</p>
@@ -42,13 +39,10 @@ client HOST file pointing to ip 1.2.3.4)</p>
 <div class="paragraph">
 <p>Observations</p>
 </div>
-<div class="paragraph">
-<p>URL														Result
-<a href="http://1.2.3.4" class="bare">http://1.2.3.4</a>											404 (Website doesnt Load)
-<a href="http://contoso.azurewebsites.net" class="bare">http://contoso.azurewebsites.net</a> 						Success (Website Loads fine)
-<a href="http://customhostname" class="bare">http://customhostname</a> 									404 (Website doesnt Load)
-(ex-hostname created in the
-client HOST file pointing to ip 1.2.3.4)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://fasigpt.github.io/images/binding5.png" alt="binding5.png">
+</div>
 </div>
 <div class="imageblock">
 <div class="content">
