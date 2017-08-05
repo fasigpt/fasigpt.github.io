@@ -20,12 +20,7 @@ There is one Virtual IP (Public IP : 1.2.3.4) for the cloud service itself and e
 
 Observations
 
-URL													Result
-http://1.2.3.4										Success (Website Loads fine)
-http://contoso.cloudapp.net 						Success (Website Loads fine)
-http://customhostname 								Success (Website Loads fine)
-(ex-hostname created in the 
-client HOST file pointing to ip 1.2.3.4)
+image::binding3.png[]
  
 
 In the above observations table we can see the website will load in all scenarios as the binding is set IP:PORT and there is no HOSTNAME.Now, lets see how this defers when we use app Service.
@@ -37,12 +32,7 @@ image::binding4.png[]
 
 Observations
 
-URL														Result
-http://1.2.3.4											404 (Website doesnt Load)
-http://contoso.azurewebsites.net 						Success (Website Loads fine)
-http://customhostname 									404 (Website doesnt Load)
-(ex-hostname created in the 
-client HOST file pointing to ip 1.2.3.4)
+image::binding5.png[]
 
 image::binding6.png[]
 
