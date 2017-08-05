@@ -12,7 +12,7 @@
 
     <link rel="shortcut icon" href="https://fasigpt.github.io/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1501866710252" />
+    <link rel="stylesheet" type="text/css" href="//fasigpt.github.io/themes/casper/assets/css/screen.css?v=1501916425967" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
     <link rel="canonical" href="https://fasigpt.github.io/2017/08/03/How-IIS-Bindings-work-in-Azure-App-Services-and-Cloud-Service.html" />
@@ -107,10 +107,13 @@
 <div class="paragraph">
 <p>Observations</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding3.png" alt="binding3.png">
-</div>
+<div class="paragraph">
+<p>URL													Result
+<a href="http://1.2.3.4" class="bare">http://1.2.3.4</a>										Success (Website Loads fine)
+<a href="http://contoso.cloudapp.net" class="bare">http://contoso.cloudapp.net</a> 						Success (Website Loads fine)
+<a href="http://customhostname" class="bare">http://customhostname</a> 								Success (Website Loads fine)
+(ex-hostname created in the
+client HOST file pointing to ip 1.2.3.4)</p>
 </div>
 <div class="paragraph">
 <p>In the above observations table we can see the website will load in all scenarios as the binding is set IP:PORT and there is no HOSTNAME.Now, lets see how this defers when we use app Service.</p>
@@ -126,10 +129,13 @@
 <div class="paragraph">
 <p>Observations</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="https://fasigpt.github.io/images/binding5.png" alt="binding5.png">
-</div>
+<div class="paragraph">
+<p>URL														Result
+<a href="http://1.2.3.4" class="bare">http://1.2.3.4</a>											404 (Website doesnt Load)
+<a href="http://contoso.azurewebsites.net" class="bare">http://contoso.azurewebsites.net</a> 						Success (Website Loads fine)
+<a href="http://customhostname" class="bare">http://customhostname</a> 									404 (Website doesnt Load)
+(ex-hostname created in the
+client HOST file pointing to ip 1.2.3.4)</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -218,8 +224,8 @@
        
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1501866710252"></script>
-    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1501866710252"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/jquery.fitvids.js?v=1501916425967"></script>
+    <script type="text/javascript" src="//fasigpt.github.io/themes/casper/assets/js/index.js?v=1501916425967"></script>
 
 </body>
 </html>
