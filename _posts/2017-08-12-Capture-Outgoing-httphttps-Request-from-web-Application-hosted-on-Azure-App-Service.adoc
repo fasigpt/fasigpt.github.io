@@ -1,0 +1,42 @@
+= Capture Outgoing http/https Request from web Application hosted on Azure App Service
+
+
+
+:hp-tags: azure app service,Fiddler,Proxy
+:hp-alt-title: Capture Outgoing http/https Request from web Application hosted on Azure App Service
+:published_at: 2017-08-12
+ 
+
+If you are troubleshooting any 500 Errors caused due to any form of connectivity issues with outgoing webservice/webApi calls, you often have to capture system.net trace which is very huge and time consuming to review. I am working a way to host fiddlercore as a webjob to proxy the requests, but meanwhile I have found another technique to capture these requests.
+
+ Step1:
+Create an Azure VM with an inbound rule (NSG) allowing 8888 traffic
+
+image::fiddlerproxy1.png[]
+
+
+ 
+
+Step2:
+
+Install and Run Fiddler. 
+Fiddler options-HTTPS-Enable “decrypt https traffic” if you are capturing SSL traffic as well
+Fiddler options-Connections-
+
+image::fiddlerproxy2.png[]
+
+ 
+
+Step3: Restart Fiddler
+
+Step4: On the application side you only need to do this change, add the system.net proxy settings 
+
+  <system.net>
+ <defaultProxy>
+  <proxy autoDetect="false" bypassonlocal="false" proxyaddress="http://IpAddressOfYourAzureVM:8888" usesystemdefault="false" />
+ </defaultProxy>
+</system.net>
+
+Now, all the outgoing calls from your Azure AppService should be proxied through Fiddler running on another Azure VM.
+
+
