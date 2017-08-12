@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 12 Aug 2017 10:24:12 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Capture Outgoing http/https Request from web Application hosted on Azure App Service]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Its Just the beginning..]]></title><description><![CDATA[Welcome to this blogging Site..]]></description><link>https://fasigpt.github.io</link><generator>RSS for Node</generator><lastBuildDate>Sat, 12 Aug 2017 10:26:29 GMT</lastBuildDate><atom:link href="https://fasigpt.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Capture Outgoing http/https Request from web Application hosted on Azure App Service]]></title><description><![CDATA[<div class="paragraph">
 <p>If you are troubleshooting any 500 Errors caused due to any form of connectivity issues with outgoing webservice/webApi calls, you often have to capture system.net trace which is very huge and time consuming to review. I am working a way to host fiddlercore as a webjob to proxy the requests, but meanwhile I have found another technique to capture these requests.</p>
 </div>
 <div class="literalblock">
@@ -18,7 +18,7 @@ Create an Azure VM with an inbound rule (NSG) allowing 8888 traffic</pre>
 <div class="paragraph">
 <p>Install and Run Fiddler.
 Fiddler options-HTTPS-Enable “decrypt https traffic” if you are capturing SSL traffic as well
-Fiddler options-Connections-</p>
+Fiddler options-Connections- Enable “Allow remote computers to connect”</p>
 </div>
 <div class="imageblock">
 <div class="content">
