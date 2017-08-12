@@ -21,7 +21,7 @@ Step2:
 
 Install and Run Fiddler. 
 Fiddler options-HTTPS-Enable “decrypt https traffic” if you are capturing SSL traffic as well
-Fiddler options-Connections-
+Fiddler options-Connections- Enable “Allow remote computers to connect”
 
 image::fiddlerproxy2.png[]
 
