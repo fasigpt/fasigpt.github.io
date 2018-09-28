@@ -1,0 +1,40 @@
+= Azure Policy - Block storage deployment to a specifc subnet
+
+:published_at: 2018-09-28
+:hp-tags: Azure Policy, Azure Storage, Azure Subnet
+:hp-alt-title: Use approved subnet for Storage deployment
+
+If you need to block storage deployment to a specifc Azure subnet, you could use the below azure policy definiton -
+
+{
+  "mode": "all",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Storage/storageAccounts"
+        },
+        {
+          "field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*].id",
+          "equals": "[parameters('subnetId')]"
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  },
+  "parameters": {
+    "subnetId": {
+      "type": "String",
+      "metadata": {
+        "displayName": "Subnet Id",
+        "description": "Resource Id for Subnet"
+      }
+    }
+  }
+}
+
+
+If you need help on deploying the policy please visit https://docs.microsoft.com/en-us/azure/governance/policy/samples/use-approved-subnet-vm-nics
