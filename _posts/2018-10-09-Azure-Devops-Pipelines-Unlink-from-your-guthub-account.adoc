@@ -1,3 +1,0 @@
-= Azure Devops Pipelines -unlink from your github account
-
-image::pipeline.gif[] 
