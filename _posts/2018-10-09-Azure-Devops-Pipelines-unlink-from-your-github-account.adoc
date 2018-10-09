@@ -1,0 +1,10 @@
+= Azure Devops Pipelines -unlink from your github account
+
+
+
+:hp-tags: azure dev ops, azure pipelines
+:hp-alt-title: Azure Devops Pipelines -unlink from your github account
+:published_at: 2018-10-09
+
+
+image::pipeline.gif[] 
