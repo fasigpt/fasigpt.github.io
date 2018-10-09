@@ -1,3 +1,3 @@
-= Azure Devops Pipelines -Unlink from your guthub account
+= Azure Devops Pipelines -unlink from your github account
 
 image::pipeline.gif[] 
